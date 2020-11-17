@@ -8,6 +8,17 @@ namespace ComicBookGallery.Controllers
 {
     public class ComicBooksController : Controller
     {
+        //path pattern = controller/action(method)
+        //ex : ComicBooks/Detail is how to get to this page and action "URL routing"
 
+        public ActionResult Detail()
+        {
+            if(DateTime.Today.DayOfWeek == DayOfWeek.Tuesday)
+            {
+                return Redirect("https://www.google.com");
+            }
+            return Content("Whats godddddddydydydy");
+            
+        }
     }
 }
