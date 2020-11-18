@@ -1,5 +1,7 @@
 ﻿@{
     Layout = null;
+
+    //we use razor up here to use C# code. this is how you add variables
 }
 
 <!DOCTYPE html>
@@ -11,7 +13,25 @@
 </head>
 <body>
     <div>
-    <h1>Hello from our view bitch</h1>
+        <h1>@ViewBag.SeriesTitle</h1>
+        <h2>Issue #@ViewBag.IssueNumber</h2>
+
+        <h5>Description</h5>
+        <div> @Html.Raw(ViewBag.Description)</div>
+        @if (ViewBag.Artists.Length > 0)
+        {
+            <h5>Artist</h5>
+            <div>
+                <ul>
+                    @foreach (var artist in ViewBag.Artists)
+                    {
+                        <li>@artist</li>
+                    }
+
+                </ul>
+            </div>
+        }
+
     </div>
 </body>
 </html>
