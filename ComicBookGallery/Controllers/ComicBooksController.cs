@@ -11,13 +11,9 @@ namespace ComicBookGallery.Controllers
         //path pattern = controller/action(method)
         //ex : ComicBooks/Detail is how to get to this page and action "URL routing"
 
-        public ActionResult Detail()
+        public ActionResult Detail()//action result is the base class of both redirect and content
         {
-            if(DateTime.Today.DayOfWeek == DayOfWeek.Tuesday)
-            {
-                return Redirect("https://www.google.com");
-            }
-            return Content("Whats godddddddydydydy");
+            return View();
             
         }
     }
