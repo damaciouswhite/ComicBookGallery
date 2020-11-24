@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ComicBookGallery.Data;
+using ComicBookGallery.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,24 +13,28 @@ namespace ComicBookGallery.Controllers
         //path pattern = controller/action(method)
         //ex : ComicBooks/Detail is how to get to this page and action "URL routing"
 
-        public ActionResult Detail()//action result is the base class of both redirect and content
+        private ComicBookRepository _comicBookRepo = null;
+
+        public ComicBooksController()
         {
+            _comicBookRepo = new ComicBookRepository();
+        }
 
-            ViewBag.SeriesTitle = "The Amazing Spider-Man";
-            ViewBag.IssueNumber = 700;
-            ViewBag.Description = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives... <strong>will Peter Parker?</strong></p>";
-            ViewBag.Artists = new string[]
+        public ActionResult Index()
+        {
+            var comicBooks = _comicBookRepo.GetComicBooks();
+
+            return View(comicBooks);
+        }
+
+        public ActionResult Detail(int? id)//action result is the base class of both redirect and content
+        {
+            if(id == null)
             {
-                "Script: Dan Slott",
-                "Pencils: Humberto Ramos",
-                "Inks: Victor Olazaba",
-                "Colors: Edgar Delgado",
-                "Letters: Chris Eliopoulos"
-            };
-
-
-            return View();
-            
+                return HttpNotFound();
+            }
+            var comicBook = _comicBookRepo.GetComicBook(id.Value);
+            return View(comicBook);
         }
     }
 }
